@@ -1,0 +1,650 @@
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Application {
+  _id: ID!
+  name: String!
+  url: String!
+  iconId: String
+}
+
+input ApplicationInput {
+  name: String
+  url: String
+}
+
+type CheckUserLoginResult {
+  user: User!
+  loginPhone: UserPhone!
+}
+
+input CreateApplicationDto {
+  name: String!
+  url: String!
+  iconId: String
+}
+
+input CreateDepartmentDto {
+  name: String!
+}
+
+input CreateDepartmentPayoutManagerDto {
+  userId: String!
+  departmentId: String!
+  readFields: [String]!
+  writeFields: [String]!
+}
+
+input CreateDivisionDto {
+  departmentId: String!
+  name: String!
+}
+
+input CreatePayoutDto {
+  userId: String!
+  prepaid: String
+  cellular: String
+  otherPayouts: String
+  prize: String
+  compensation: String
+  overtime: String
+  salary: String
+  firstHalf: String
+  secondHalf: String
+  toIssue: String
+  comment: String
+  period: String!
+}
+
+input CreatePayoutRuleDto {
+  userId: String!
+  readFields: [String!]!
+  writeFields: [String!]!
+}
+
+input CreateRoleDto {
+  name: String!
+}
+
+input CreateUserDto {
+  name: String!
+  surname: String!
+  patronymic: String!
+  avatarId: String
+  sex: Float
+  alias: String!
+  divisionId: String
+  roleId: String
+  birthday: Date
+  employmentAt: Date
+  dismissalAt: Date
+  hobbies: String
+  professionalHobbies: String
+  kpp: String
+  correspondentAccount: String
+  checkingAccount: String
+  snils: String
+  inn: String
+  bik: String
+}
+
+input CreateUserEmailDto {
+  userId: String!
+  label: String!
+  email: String!
+  isLogin: Boolean
+}
+
+input CreateUserEmergencyContactDto {
+  userId: String!
+  name: String!
+  surname: String!
+  patronymic: String!
+  phone: String!
+  relation: String!
+}
+
+input CreateUserHolidayDto {
+  userId: String!
+  start: Date!
+  end: Date!
+}
+
+input CreateUserLabelDto {
+  type: String!
+  name: String!
+}
+
+input CreateUserMessengerDto {
+  userId: String!
+  label: String!
+  nickname: String!
+}
+
+input CreateUserPhoneDto {
+  userId: String!
+  label: String!
+  phone: String!
+  isLogin: Boolean
+}
+
+input CreateUserSocialNetworkDto {
+  userId: String!
+  label: String!
+  link: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Department {
+  _id: ID!
+  name: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+  divisions: [Division]!
+}
+
+input DepartmentInput {
+  _id: String
+  name: String
+}
+
+type DepartmentPayoutManager {
+  _id: ID!
+  departmentId: String!
+  userId: String!
+  readFields: [String]!
+  writeFields: [String]!
+  deleted: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+  user: User!
+  department: Department!
+}
+
+input DepartmentPayoutManagerInput {
+  userId: String
+  departmentId: String
+}
+
+type Division {
+  _id: ID!
+  departmentId: String!
+  name: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+  department: Department
+  chefId: String
+  users: [User]!
+  chef: User
+}
+
+input DivisionInput {
+  _id: String
+  name: String
+}
+
+input DivisionsInput {
+  departmentId: String
+}
+
+type Document {
+  _id: ID!
+  fileName: String!
+  bucketName: String!
+  documentName: String!
+  ownerId: String!
+  link: String
+  linkExpiringAt: Date
+}
+
+input LoginInput {
+  login: String!
+  password: String!
+}
+
+type LoginResult {
+  user: User!
+  accessToken: String!
+}
+
+type Mutation {
+  createDepartment(payload: CreateDepartmentDto!): Department!
+  updateDepartment(payload: UpdateDepartmentDto!): Department!
+  deleteDepartment(_id: String!): Department!
+  createDivision(payload: CreateDivisionDto!): Division!
+  updateDivision(payload: UpdateDivisionDto!): Division!
+  deleteDivision(_id: String!): Division!
+  createRole(payload: CreateRoleDto!): Role!
+  updateRole(payload: UpdateRoleDto!): Role!
+  deleteRole(_id: String!): Role!
+  createUserPhone(payload: CreateUserPhoneDto!): UserPhone!
+  updateUserPhone(payload: UpdateUserPhoneDto!): UserPhone!
+  deleteUserPhone(_id: String!): UserPhone!
+  createUserEmail(payload: CreateUserEmailDto!): UserEmail!
+  updateUserEmail(payload: UpdateUserEmailDto!): UserEmail!
+  deleteUserEmail(_id: String!): UserEmail!
+  createUserMessenger(payload: CreateUserMessengerDto!): UserMessenger!
+  updateUserMessenger(payload: UpdateUserMessengerDto!): UserMessenger!
+  deleteUserMessenger(_id: String!): UserMessenger!
+  createUserSocialNetwork(payload: CreateUserSocialNetworkDto!): UserSocialNetwork!
+  updateUserSocialNetwork(payload: UpdateUserSocialNetworkDto!): UserSocialNetwork!
+  deleteUserSocialNetwork(_id: String!): UserSocialNetwork!
+  createUserEmergencyContact(payload: CreateUserEmergencyContactDto!): UserEmergencyContact!
+  updateUserEmergencyContact(payload: UpdateUserEmergencyContactDto!): UserEmergencyContact!
+  deleteUserEmergencyContact(_id: String!): UserEmergencyContact!
+  createUser(payload: CreateUserDto!): User!
+  updateUser(payload: UpdateUserDto!): User!
+  deleteUser(_id: String!): User!
+  creteUserHoliday(payload: CreateUserHolidayDto!): UserHoliday!
+  updateUserHoliday(payload: UpdateUserHolidayDto!): UserHoliday!
+  deleteUserHoliday(_id: String!): UserHoliday!
+  createUserLabel(payload: CreateUserLabelDto!): UserLabel!
+  updatePermission(payload: UpdatePermissionDto!): Permission!
+  createAuthApplication(payload: CreateApplicationDto!): Application!
+  deleteAuthApplication(_id: String!): Application!
+  createPayout(payload: CreatePayoutDto!): Payout!
+  updatePayout(payload: UpdatePayoutDto!): Payout!
+  deletePayout(_id: String!): Payout!
+  createPayoutRule(payload: CreatePayoutRuleDto!): PayoutRule!
+  updatePayoutRule(payload: UpdatePayoutRuleDto!): PayoutRule!
+  deletePayoutRule(_id: String!): PayoutRule!
+  createDepartmentPayoutManager(payload: CreateDepartmentPayoutManagerDto!): DepartmentPayoutManager!
+  updateDepartmentPayoutManager(payload: UpdateDepartmentPayoutManagerDto!): DepartmentPayoutManager!
+  deleteDepartmentPayoutManager(_id: String!): DepartmentPayoutManager!
+  checkUserLogin(login: String!): CheckUserLoginResult
+  login(payload: LoginInput!): LoginResult!
+}
+
+type Payout {
+  _id: ID!
+  userId: String!
+  prepaid: String
+  cellular: String
+  otherPayouts: String
+  prize: String
+  compensation: String
+  overtime: String
+  salary: String
+  firstHalf: String
+  secondHalf: String
+  toIssue: String
+  comment: String
+  period: String!
+  createdAt: Date!
+  updatedAt: Date!
+  user: User!
+}
+
+type PayoutRule {
+  _id: ID!
+  userId: String!
+  readFields: [String]!
+  writeFields: [String]!
+  deleted: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+input PayoutRuleInput {
+  userId: String
+}
+
+input PayoutsInput {
+  period: String
+}
+
+type Permission {
+  _id: ID!
+  pathname: String!
+  readersIds: [String]!
+  writersIds: [String]!
+  allIsReaders: Boolean
+  allIsWriters: Boolean
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+  readers: [User]!
+  writers: [User]!
+  iAmIsReader: Boolean!
+  iAmIsWriter: Boolean!
+}
+
+type Query {
+  department(payload: DepartmentInput): Department
+  departments: [Department]!
+  division(payload: DivisionInput): Division
+  divisions(payload: DivisionsInput): [Division]!
+  role(payload: RoleInput): Role
+  roles: [Role]!
+  userPhones(userId: String!): [UserPhone]!
+  userEmails(userId: String!): [UserEmail]!
+  userMessengers(userId: String!): [UserMessenger]!
+  userSocialNetworks(userId: String!): [UserSocialNetwork]!
+  userEmergencyContacts(userId: String!): [UserEmergencyContact]!
+  user(payload: UserInput): User
+  users(payload: UsersInput): [User]!
+  userHolidays(userId: String!): [UserHoliday]!
+  userTokens(userId: String!): [UserToken]!
+  userLabels(type: String!): [UserLabel]!
+  permissions: [Permission!]!
+  permission(pathname: String!): Permission!
+  userDocuments(userId: String!): [StackDocument!]!
+  authApplications: [Application!]!
+  authApplication(payload: ApplicationInput!): Application!
+  payouts(payload: PayoutsInput!): [Payout]!
+  payoutRules: [PayoutRule]!
+  payoutRule(payload: PayoutRuleInput!): PayoutRule
+  departmentPayoutManagers(payload: DepartmentPayoutManagerInput): [DepartmentPayoutManager!]!
+  whoAmI: User!
+}
+
+type Role {
+  _id: ID!
+  name: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+  users: [User]!
+}
+
+input RoleInput {
+  _id: String
+  name: String
+}
+
+type StackDocument {
+  _id: ID!
+  documentName: String
+  fileName: String!
+  bucketName: String!
+  folderName: String
+  ownerId: String
+  link: String!
+  createdAt: Date!
+}
+
+input UpdateDepartmentDto {
+  _id: ID!
+  name: String
+}
+
+input UpdateDepartmentPayoutManagerDto {
+  _id: String!
+  userId: String
+  departmentId: String
+  readFields: [String]
+  writeFields: [String]
+}
+
+input UpdateDivisionDto {
+  _id: String!
+  departmentId: String
+  name: String
+  chefId: String
+}
+
+input UpdatePayoutDto {
+  _id: ID!
+  userId: String
+  prepaid: String
+  cellular: String
+  otherPayouts: String
+  prize: String
+  compensation: String
+  overtime: String
+  salary: String
+  firstHalf: String
+  secondHalf: String
+  toIssue: String
+  comment: String
+  period: String
+}
+
+input UpdatePayoutRuleDto {
+  _id: String!
+  userId: String
+  readFields: [String]!
+  writeFields: [String]!
+}
+
+input UpdatePermissionDto {
+  _id: String!
+  pathname: String
+  readersIds: [String]
+  writersIds: [String]
+}
+
+input UpdateRoleDto {
+  _id: ID!
+  name: String
+}
+
+input UpdateUserDto {
+  _id: ID!
+  name: String
+  surname: String
+  patronymic: String
+  avatarId: String
+  sex: Float
+  alias: String
+  divisionId: String
+  roleId: String
+  birthday: Date
+  employmentAt: Date
+  dismissalAt: Date
+  hobbies: String
+  professionalHobbies: String
+  kpp: String
+  correspondentAccount: String
+  checkingAccount: String
+  snils: String
+  inn: String
+  bik: String
+  passport: UpdateUserPassportDto
+}
+
+input UpdateUserEmailDto {
+  _id: ID!
+  userId: String
+  label: String
+  email: String
+  isLogin: Boolean
+}
+
+input UpdateUserEmergencyContactDto {
+  _id: ID!
+  userId: String
+  name: String
+  surname: String
+  patronymic: String
+  phone: String
+  relation: String
+}
+
+input UpdateUserHolidayDto {
+  _id: ID!
+  userId: String
+  start: Date
+  end: Date
+}
+
+input UpdateUserMessengerDto {
+  _id: ID!
+  userId: String
+  label: String
+  nickname: String
+}
+
+input UpdateUserPassportDto {
+  serial: String
+  number: String
+  dateOfIssue: Date
+  departmentCode: String
+  issuedBy: String
+}
+
+input UpdateUserPhoneDto {
+  _id: ID!
+  userId: String
+  label: String
+  phone: String
+  isLogin: Boolean
+}
+
+input UpdateUserSocialNetworkDto {
+  _id: ID!
+  userId: String
+  label: String
+  link: String
+}
+
+type User {
+  _id: ID!
+  name: String!
+  surname: String!
+  patronymic: String!
+  avatarId: String
+  sex: Float
+  alias: String!
+  divisionId: String
+  roleId: String
+  isAdmin: Boolean
+  birthday: Date
+  employmentAt: Date
+  dismissalAt: Date
+  hobbies: String
+  professionalHobbies: String
+  kpp: String
+  correspondentAccount: String
+  checkingAccount: String
+  snils: String
+  inn: String
+  bik: String
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+  emails: [UserEmail]!
+  emergencyContacts: [UserEmergencyContact]!
+  holidays: [UserHoliday]!
+  messengers: [UserMessenger]!
+  phones: [UserPhone]!
+  socialNetworks: [UserSocialNetwork]!
+  avatar: Document
+  documents: [Document]!
+  passport: UserPassport
+  division: Division
+  role: Role
+  tokens: [UserToken]!
+  payout(period: String!): Payout!
+}
+
+type UserEmail {
+  _id: ID!
+  userId: String!
+  label: String!
+  email: String!
+  isLogin: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+type UserEmergencyContact {
+  _id: ID!
+  userId: String!
+  name: String!
+  surname: String!
+  patronymic: String!
+  phone: String!
+  relation: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+type UserHoliday {
+  _id: ID!
+  userId: String!
+  start: Date!
+  end: Date!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+input UserInput {
+  _id: String
+  alias: String
+}
+
+type UserLabel {
+  _id: ID!
+  type: String!
+  name: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+type UserMessenger {
+  _id: ID!
+  userId: String!
+  label: String!
+  nickname: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+type UserPassport {
+  serial: String
+  number: String
+  dateOfIssue: Date
+  departmentCode: String
+  issuedBy: String
+}
+
+type UserPhone {
+  _id: ID!
+  userId: String!
+  label: String!
+  phone: String!
+  isLogin: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+input UsersInput {
+  roleId: String
+  divisionId: String
+}
+
+type UserSocialNetwork {
+  _id: ID!
+  userId: String!
+  label: String!
+  link: String!
+  createdAt: Date!
+  updatedAt: Date!
+  deleted: Boolean!
+}
+
+type UserToken {
+  _id: ID!
+  userId: String!
+  origin: String!
+  userAgent: String!
+  token: String!
+  createdAt: Date
+  updatedAt: Date!
+  deleted: Boolean!
+}
+

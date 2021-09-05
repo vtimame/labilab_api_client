@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cfaf3ba7-33e0-4c50-a012-747ca6d838c7" name="Development">
+        <fileTransfer accessType="SFTP" host="dev-api.labilab.ru" port="22" sshConfigId="a18d552d-466a-41b3-acab-770f159d6a3e" sshConfig="vtima@dev-api.labilab.ru:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

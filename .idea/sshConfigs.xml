@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="dev-api.labilab.ru" id="a18d552d-466a-41b3-acab-770f159d6a3e" port="22" nameFormat="DESCRIPTIVE" username="vtima" />
+    </configs>
+  </component>
+</project>

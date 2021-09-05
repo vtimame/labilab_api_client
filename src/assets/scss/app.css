@@ -1,0 +1,69 @@
+.application {
+  background-color: #EBF1F5;
+  transition: background-color 0.2s;
+}
+
+.payouts-table {
+  width: 100%;
+}
+
+.payouts-table thead, .payouts-table tbody {
+  font-size: 12px;
+}
+
+.payouts-table__input {
+  border: 1px solid transparent;
+  background-color: transparent;
+  width: 100%;
+  padding: .5rem .5rem;
+  outline: none;
+  transition: .2s;
+}
+
+.application--dark .payouts-table__input {
+  color: white;
+}
+
+.payouts-table__input:focus {
+  border-color: #137CBD;
+}
+
+.payouts-table td {
+  max-width: 5%;
+}
+
+.application .payouts-table {
+  border: 1px solid rgb(211,212,215);
+}
+
+
+.application--dark .payouts-table {
+  border: 1px solid rgb(79,92,102);
+}
+
+.application .payouts-table tbody tr {
+  border-bottom: 1px solid rgb(211,212,215) !important;
+}
+
+
+.application--dark .payouts-table tbody tr {
+  border-bottom: 1px solid rgb(79,92,102) !important;
+}
+
+.application--dark {
+  background-color: #293742;
+  transition: background-color 0.2s;
+}
+
+.bp3-button, .bp3-tab {
+  outline: none !important;
+  user-select: none !important;
+}
+
+.bp3-tab-panel {
+  margin-top: 0 !important;
+}
+
+.no-outline > .bp3-input:focus {
+  outline: none !important;
+}
